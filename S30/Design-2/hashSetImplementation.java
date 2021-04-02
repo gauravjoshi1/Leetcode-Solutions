@@ -10,16 +10,35 @@ public class MyHashSet {
     }
     
     public void add(int key) {
-  
+  		int bucketHashCode = hashCodeBucket(key);
+  		int bucketSizeHashCode = hashCodeBucketSize(key);
+  		
+  		if (hashArr[bucketHashCode] == null) {
+  			hashArr[bucketHashCode] = new boolean[BUCKETSIZE];
+  		}
+  		
+  		hashArr[bucketHashCode][bucketHashCode] = true;
     }
     
     public void remove(int key) {
-        
+        int bucketHashCode = hashCodeBucket(key);
+  		int bucketSizeHashCode = hashCodeBucketSize(key);
+  		
+  		if (hashArr[bucketHashCode] != null) {
+  			hashArr[bucketHashCode][bucketSizeHashCode] = false;
+  		}
     }
     
     /** Returns true if this set contains the specified element */
     public boolean contains(int key) {
-     
+    	int bucketHashCode = hashCodeBucket(key);
+  		int bucketSizeHashCode = hashCodeBucketSize(key);
+  		
+  		if (hashArr[bucketHashCode] != null) {
+  			return hashArr[bucketHashCode][bucketSizeHashCode];
+  		}
+  		
+  		return false;
     }
     
     private int hashCodeBucket(int key) {
