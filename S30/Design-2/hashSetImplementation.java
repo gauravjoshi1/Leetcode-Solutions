@@ -1,8 +1,8 @@
-public class MyHashSet {
+class MyHashSet {
 	
-	private static final int BUCKET = 1000;
-	private static final int BUCKETSIZE = 1000;
-	private boolean[] hashArr;
+	private static final int BUCKET = 1001;
+	private static final int BUCKETSIZE = 1001;
+	private boolean[][] hashArr;
 	
     /** Initialize your data structure here. */
     public MyHashSet() {
@@ -17,7 +17,7 @@ public class MyHashSet {
   			hashArr[bucketHashCode] = new boolean[BUCKETSIZE];
   		}
   		
-  		hashArr[bucketHashCode][bucketHashCode] = true;
+  		hashArr[bucketHashCode][bucketSizeHashCode] = true;
     }
     
     public void remove(int key) {
@@ -42,11 +42,11 @@ public class MyHashSet {
     }
     
     private int hashCodeBucket(int key) {
-    	return key % 5;
+    	return key%BUCKET;
     }
     
     private int hashCodeBucketSize(int key) {
-    	return key / 5;
+    	return key/BUCKETSIZE;
     }
 }
 
