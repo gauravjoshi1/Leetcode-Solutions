@@ -1,6 +1,6 @@
 public Solution {
 	
-	public int search(int nums[], int target) {
+	public int search(int[] nums, int target) {
 		if (nums == null) {
 			return -1;
 		}
