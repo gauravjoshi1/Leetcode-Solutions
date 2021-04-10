@@ -7,8 +7,9 @@
 
 class Solution {
 	public List<List<String>> groupAnagrams(String[] strs) {
+		if (strs == null || str.length == 0) return new ArrayList<>();
+		
 		HashMap<String, List<String>> anagramMap = new HashMap<>();
-		ArrayList<String> anagramVal = new ArrayList<>();
 		
 		for (String str : strs) {
 			String sortedString = sortString(str);
