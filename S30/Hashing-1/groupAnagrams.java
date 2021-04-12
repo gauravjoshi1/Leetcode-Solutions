@@ -3,8 +3,6 @@
 	Space Complexity: O(n* k) N elements with average character size k.
 */
 
-
-
 class Solution {
 	public List<List<String>> groupAnagrams(String[] strs) {
 		if (strs == null || str.length == 0) return new ArrayList<>();
