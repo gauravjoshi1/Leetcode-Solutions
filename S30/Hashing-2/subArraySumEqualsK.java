@@ -4,23 +4,24 @@ class Solution {
         
         int sum = 0;
         int count = 0;
-        int compliment = 0;
+        int complement = 0;
         
         HashMap<Integer, Integer> rMap = new HashMap<>();
+        rMap.put(0, 1);
         
         for (int i = 0; i < nums.length; i++) {
 			sum += nums[i];
-			compliment = sum - k;
-			
-			if (rMap.containsKey(sum)) {
+			complement = sum - k;
+ 			
+ 			if (rMap.containsKey(complement)) {
+ 				count += rMap.get(complement);
+ 			}
+            
+            if (rMap.containsKey(sum)) {
 				rMap.put(sum, rMap.get(sum) + 1);
 			} else {
 				rMap.put(sum, 1);
 			}
- 			
- 			if (rMap.containsKey(compliment)) {
- 				count += rMap.get(compliment);
- 			}
         }
         
         return count;
