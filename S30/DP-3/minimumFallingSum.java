@@ -40,7 +40,7 @@ class Solution {
     
 		int row = matrix.length;
 		int col = matrix[0].length;    	
-		int min = 99999;
+		int min = Integer.MAX_VALUE;
     	
     	int[][] minSumMatrix = new int[row][col];
     	
