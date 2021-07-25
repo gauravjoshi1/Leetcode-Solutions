@@ -1,3 +1,15 @@
+/******************************************************
+
+Algorithm:
+1. Add closing brackets to the stack whenever opening
+brackets are seen in the string
+2. If closing brackets are seen in the string, pop off
+opening brackets. If stack is already empty or the alignment
+is off, then it is not a valid string
+3. For a valid string, ultimately stack will be empty.
+
+*******************************************************/
+
 class Solution {
     private Map<Character, Character> charMap = Map.of(
 		'(', ')',
