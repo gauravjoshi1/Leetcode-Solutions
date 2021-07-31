@@ -28,3 +28,35 @@ We check 2^n combinations (for each element we check if
 // 		}
 // 	}
 //
+
+enum Index {
+	GOOD, BAD, UNKNOWN
+}
+
+class Solution {
+	Index[] memoTable;
+
+	public boolean canJump(int[] nums) {
+		memoTable = new Index[nums.length];
+
+		for (int i = 0; i < nums.length; i++) {
+			memoTable[i] = Index.UNKNOWN;
+		}
+
+		memoTable[memoTable.length - 1] = Index.GOOD;
+
+		for (int i = nums.length - 2; i >= 0; i--) {
+			int longestJump = Math.min(nums[i] + i, nums.length - 1);
+
+			for (int j = i + 1; j <= longestJump; j++) {
+				if (nums[j] == Index.GOOD) {
+					nums[i] = Index.GOOD;
+					break;
+				}
+			}
+		}
+
+		return nums[0] == Index.GOOD;
+	}
+
+}
