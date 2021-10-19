@@ -5,23 +5,17 @@ class MinSizeSubArraySum {
     int sum = 0;
     int first = 0;
     int last = 0;
-    int windowSize = 0;
+    int windowSize = Integer.MAX_VALUE;
 
-    // Initial Window
-    for (int i = 0; i < arr.length; i++) {
-		if (sum < S) {
-			sum = sum + arr[i];
-			last = i;
-			windowSize = windowSize + 1;
-		} else {
+	for (int end = 0; end < arr.length; end++) {
+		sum = sum + arr[end];
+		while (sum >= S) {
+			windowSize = Math.min(windowSize,  end - start + 1);
 			sum = sum - arr[start];
 			start = start + 1;
-
-			if (sum > S) {
-				windowSize = last - start;
-			}
 		}
     }
+    return windowSize;
   }
 }
 
