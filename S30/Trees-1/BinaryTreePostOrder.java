@@ -13,6 +13,8 @@
  *     }
  * }
  */
+
+// recursive solution
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
@@ -31,5 +33,40 @@ class Solution {
         res.add(ptr.val);
 
         return res;
+    }
+}
+
+// iterative
+class Solution {
+	Stack<TreeNode> postStack = new Stack<>();
+
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+
+
+        if (root == null) return res;
+
+        traverse(root);
+        TreeNode visited = null;
+
+        while (!postStack.isEmpty()) {
+            TreeNode ptr = postStack.peek();
+
+            if (ptr.right != null && ptr.right != visited) {
+                traverse(ptr.right);
+            } else {
+                visited = postStack.pop();
+                res.add(visited.val);
+            }
+        }
+
+        return res;
+    }
+
+    private void traverse(TreeNode ptr) {
+        while (ptr != null) {
+            postStack.push(ptr);
+            ptr = ptr.left;
+        }
     }
 }
