@@ -13,9 +13,9 @@
  *     }
  * }
  */
-class Solution {
 
-    // recursive
+ // recursive solution
+class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
         if (root == null) return new ArrayList<>();
 
@@ -32,5 +32,33 @@ class Solution {
         preorderArr = traverse(ptr.right, preorderArr);
 
         return preorderArr;
+    }
+}
+
+
+// iterative solution
+class Solution {
+    Stack<TreeNode> preorderStack = new Stack<>();
+
+    public List<Integer> preorderTraversal(TreeNode root) {
+        if (root == null) return new ArrayList<>();
+
+        List<Integer> preorderArr = new ArrayList<>();
+        traverseLeft(root, preorderArr);
+
+        while (!preorderStack.isEmpty()) {
+            TreeNode ptr = preorderStack.pop();
+            traverseLeft(ptr.right, preorderArr);
+        }
+
+        return preorderArr;
+    }
+
+    private void traverseLeft(TreeNode ptr, List<Integer> preorderArr) {
+        while (ptr != null) {
+            preorderArr.add(ptr.val);
+            preorderStack.push(ptr);
+            ptr = ptr.left;
+        }
     }
 }
