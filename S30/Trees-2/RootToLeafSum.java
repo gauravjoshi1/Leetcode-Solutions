@@ -29,3 +29,35 @@ class Solution {
 	}
 }
 
+// iterative solution
+class Solution {
+    Stack<Integer> sumStack = new Stack<>();
+    Stack<TreeNode> path = new Stack<>();
+
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) return false;
+        traverseLeft(root, 0);
+
+        while (!path.isEmpty()) {
+            TreeNode ptr = path.pop();
+            int currSum = sumStack.pop();
+
+            if (ptr.left == null && ptr.right == null && currSum == targetSum) {
+                return true;
+            }
+
+            traverseLeft(ptr.right, currSum);
+        }
+
+        return false;
+    }
+
+    private void traverseLeft(TreeNode ptr, int currSum) {
+        while (ptr != null) {
+            currSum = currSum + ptr.val;
+            sumStack.push(currSum);
+            path.push(ptr);
+            ptr = ptr.left;
+        }
+    }
+}
