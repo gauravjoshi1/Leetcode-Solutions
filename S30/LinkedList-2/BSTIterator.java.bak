@@ -14,35 +14,36 @@
  * }
  */
 class BSTIterator {
-    
-    TreeNode ptr;
-    ArrayList<Integer> BSTList;
-    int countOfNext;
+    Stack<TreeNode> bStack;
     
     public BSTIterator(TreeNode root) {
-        ptr = root;
-        BSTList = new ArrayList<>();
-        countOfNext = 0;
+        bStack = new Stack<>();
         
         // call the inorderT to create an inorder List
-        inorderT(ptr);
+        leftTraverse(root);
     }
     
     public int next() {
-        return BSTList.get(countOfNext++);
+        TreeNode currNode = bStack.pop();
+        
+        if (currNode.right != null) {
+            leftTraverse(currNode.right);    
+        }
+        
+        return currNode.val;
     }
     
     public boolean hasNext() {
-        return countOfNext < BSTList.size();
+        return !bStack.isEmpty();
     }
     
-    private void inorderT(TreeNode refPtr) {
-        if (refPtr == null) return;
-       
-        inorderT(refPtr.left);
-        BSTList.add(refPtr.val); 
-        inorderT(refPtr.right);
+    private void leftTraverse(TreeNode ptr) {
+        while (ptr != null) {
+            bStack.push(ptr);
+            ptr = ptr.left;
+        }
     }
+    
 }
 
 /**

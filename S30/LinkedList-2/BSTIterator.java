@@ -19,7 +19,7 @@ class BSTIterator {
     public BSTIterator(TreeNode root) {
         bStack = new Stack<>();
         
-        // call the inorderT to create an inorder List
+        // push the left side of the tree into the Stack
         leftTraverse(root);
     }
     
@@ -27,6 +27,7 @@ class BSTIterator {
         TreeNode currNode = bStack.pop();
         
         if (currNode.right != null) {
+			// O(n) cost for pushing the entire right side in worst cases 
             leftTraverse(currNode.right);    
         }
         
