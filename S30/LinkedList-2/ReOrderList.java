@@ -12,27 +12,43 @@ class Solution {
     public void reorderList(ListNode head) {
         if (head == null) return;
         
-        ListNode lastNode = head;
-        ListNode frontPtr = head;
-        Stack<ListNode> orderStack = new Stack<>(); 
-       
-        while (lastNode != null) {
-            orderStack.push(lastNode);
-            lastNode = lastNode.next;
+        ListNode slow = head;
+        ListNode fast = head;
+        
+        // get the mid element of the Linked List
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
         
-        while (!orderStack.isEmpty() && frontPtr != null) {
-            orderStack.peek().next = null;
-            
-            ListNode tempRef = frontPtr.next;
-            ListNode backPtr = orderStack.pop();
-            
-            // break out of the cycle when frontPtr approaches backPtr
-            if (backPtr == frontPtr.next) return;
-            
+        // Reverse LL
+        ListNode backPtr = reverseLL(slow);        
+        ListNode frontPtr = head;
+        
+        while (backPtr.next != null) {        
+            ListNode currNext = frontPtr.next;
             frontPtr.next = backPtr;
-            backPtr.next = tempRef;
-            frontPtr = backPtr.next;
+            frontPtr = currNext;
+            
+            currNext = backPtr.next;
+            backPtr.next = frontPtr;
+            backPtr = currNext;
         }
+        
+        
+    }
+    
+    private ListNode reverseLL(ListNode ptr) {
+        ListNode prev = null;
+        
+        while (ptr != null) {
+            ListNode nextRef = ptr.next;
+            ptr.next = prev;
+            prev = ptr;
+            ptr = nextRef;
+        }
+        
+        return prev;
+       
     }
 }
